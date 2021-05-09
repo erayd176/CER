@@ -189,5 +189,9 @@ def compute_letter_area(points):
     """
     # TODO
     # compute letter area
+    N = len(points)
+    x = points[:,0]
+    y = points[:,1]
 
-    return None
+    area = abs(sum(x[:N-1] * y[1:] - x[1:] * y[:N-1])) / 2
+    return area
