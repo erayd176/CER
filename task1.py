@@ -116,8 +116,7 @@ def compute_forward_kinematic(q, joint_limits):
     p_T_2 = np.matmul(p_T_1, one_T_2)
     p_T_3 = np.matmul(p_T_2, two_T_3)
 
-    p_r_3 = p_T_3[3, 0:3]
-    return p_r_3.reshape((3,1))
+    return p_T_3[0:3, 3]
 
 
 def compute_inverse_kinematic(position, joint_limits):
