@@ -39,7 +39,7 @@ def dictionary(letter):
             [False, True, True, True, True, True, True, True, True, True, True, True, True, False, False])
     elif letter == 'T':
         path = np.array([
-            init_head, start, [0, 1.8, 0], [0, 2, 0], [1, 2, 0], [1, 1.8, 0], [0.6, 1.8, 0],
+            init_head, [0, 1.8, 1], [0, 1.8, 0], [0, 2, 0], [1, 2, 0], [1, 1.8, 0], [0.6, 1.8, 0],
             [0.6, 0, 0], [0.4, 0, 0], [0.4, 1.8, 0], [0, 1.8, 0], end, init_head
         ])
         extrusion = np.array(
