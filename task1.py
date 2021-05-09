@@ -1,3 +1,4 @@
+
 import numpy as np
 
 
@@ -6,7 +7,6 @@ def dictionary(letter):
     For each letter (D, H, T), creates a matrix (path) of via points (x,y,z) and a vector (extrusion) of extrusions
     between consecutive via points. Extrusion is a vector of boolean values, where 1 (True) means extrude,
     and 0 (False) not extrude.
-
     inputs
         letter: char
     returns
@@ -25,7 +25,7 @@ def dictionary(letter):
     if letter == 'D':
         path = np.array([
             init_head, start, [0, 2, 0], [0.6, 2, 0], [1, 1.6, 0], [1, 0.4, 0],
-            [0.6, 0, 0], [0.4, 0, 0], [0.4, 0, 0], [0.4, 0.2, 0], [0.6, 0.2, 0], [0.8, 0.4, 0],
+            [0.6, 0, 0], [0.4, 0, 0], [0.4, 0.2, 0], [0.6, 0.2, 0], [0.8, 0.4, 0],
             [0.8, 1.6, 0], [0.6, 1.8, 0], [0.2, 1.8, 0], [0.2, 0, 0], end, init_head
         ])
         extrusion = np.array([False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False, False])
@@ -43,7 +43,7 @@ def dictionary(letter):
             [0.6, 0, 0], [0.4, 0, 0], [0.4, 1.8, 0], [0, 1.8, 0], end, init_head
         ])
         extrusion = np.array(
-            [False, True, True, True, True, True, True, True, True, True, False, False])
+            [False, False, True, True, True, True, True, True, True, True, False, False, False])
 
     return path, extrusion
 
@@ -52,7 +52,6 @@ def compute_transformation_dh(theta, d, a, alpha):
     """
     Computes the transformation matrix between joint i to joint i+1.
     given the DH-Parameters alpha, a, d, theta.
-
     inputs
         theta: DH-Parameter theta_i, float
         d: DH-Parameter d_i, float
@@ -82,7 +81,6 @@ def compute_forward_kinematic(q, joint_limits):
     Computes the end-effector coordinates (x,y,z) with respect to the frame Sp, for the given joint displacements q.
     q is a vector with the joint displacements.
     joint_limits is an array with the minimum and maximum joint values for each joint in q.
-
     inputs
         q: numpy array, float, shape (3,1)
         joint_limits: numpy array, float, shape (3, 2)
@@ -118,7 +116,7 @@ def compute_forward_kinematic(q, joint_limits):
     p_T_2 = np.matmul(p_T_1, one_T_2)
     p_T_3 = np.matmul(p_T_2, two_T_3)
 
-    p_r_3 = p_T_3[3, 0:2]
+    p_r_3 = p_T_3[3, 0:3]
     return p_r_3.reshape((3,1))
 
 
@@ -127,7 +125,6 @@ def compute_inverse_kinematic(position, joint_limits):
     Computes the joint displacements given the position of the end-effector.
     position is a vector with the (x,y,z) coordinates of the end-effector position in the frame Sp.
     joint_limits is an array with the maximum and minimum joint values for each joint in q.
-
     inputs
         position: numpy array, float, shape (3,1)
         joint_limits: numpy array, float, shape (3, 2)
@@ -186,7 +183,6 @@ def compute_letter_area(points):
     """
     Computes the total area of a letter using the given points of path.
     points is an array of points, every point has the shape (1,3).
-
     inputs
         points: numpy array, float, with shape (N_via_points, 3)
     returns
